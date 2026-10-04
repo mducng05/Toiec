@@ -168,12 +168,12 @@
                     Thư viện đề
                 </a>
                 @auth
-                    <a href="{{ route('user.my-exams.index') }}"
-                       class="site-nav-link {{ request()->routeIs('user.my-exams.*') ? 'active' : '' }}">
+                    <a href="{{ route('my-exams.index') }}"
+                       class="site-nav-link {{ request()->routeIs('my-exams.*') ? 'active' : '' }}">
                         Đề của tôi
                     </a>
-                    <a href="{{ route('user.history.index') }}"
-                       class="site-nav-link {{ request()->routeIs('user.history.*') ? 'active' : '' }}">
+                    <a href="{{ route('history.index') }}"
+                       class="site-nav-link {{ request()->routeIs('history.*') ? 'active' : '' }}">
                         Lịch sử thi
                     </a>
                 @endauth
@@ -182,7 +182,7 @@
             {{-- Auth & CTA --}}
             <div class="site-nav-auth">
                 @auth
-                    <a href="{{ route('user.my-exams.create') }}" class="btn btn-primary btn-sm" style="display:inline-flex;align-items:center;gap:6px;">
+                    <a href="{{ route('my-exams.create') }}" class="btn btn-primary btn-sm" style="display:inline-flex;align-items:center;gap:6px;">
                         <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/>
                         </svg>
@@ -204,13 +204,13 @@
                             </div>
                             <hr class="dropdown-sep">
 
-                            <a href="{{ route('user.my-exams.index') }}" class="dropdown-item">
+                            <a href="{{ route('my-exams.index') }}" class="dropdown-item">
                                 📚 Đề thi của tôi
                             </a>
-                            <a href="{{ route('user.history.index') }}" class="dropdown-item">
+                            <a href="{{ route('history.index') }}" class="dropdown-item">
                                 📊 Lịch sử làm bài
                             </a>
-                            <a href="{{ route('user.my-exams.create') }}" class="dropdown-item gold">
+                            <a href="{{ route('my-exams.create') }}" class="dropdown-item gold">
                                 ➕ Upload đề mới
                             </a>
                             <hr class="dropdown-sep">
