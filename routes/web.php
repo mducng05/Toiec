@@ -57,5 +57,21 @@ Route::middleware('auth')->group(function () {
             Route::delete('assets/{asset}', [UploadController::class, 'deleteAsset'])->name('assets.destroy');
             Route::delete('audio/{audio}', [UploadController::class, 'deleteAudio'])->name('audio.destroy');
             Route::get('files/{path}', [UploadController::class, 'serveFile'])->name('files.serve');
+
+            // Phase 3: Question & Passage Management
+            Route::get('exams/{exam}/questions', [\App\Http\Controllers\Admin\QuestionController::class, 'index'])->name('exams.questions.index');
+            Route::get('parts/{part}/questions/create', [\App\Http\Controllers\Admin\QuestionController::class, 'create'])->name('parts.questions.create');
+            Route::post('parts/{part}/questions', [\App\Http\Controllers\Admin\QuestionController::class, 'store'])->name('parts.questions.store');
+            Route::get('questions/{question}/edit', [\App\Http\Controllers\Admin\QuestionController::class, 'edit'])->name('questions.edit');
+            Route::put('questions/{question}', [\App\Http\Controllers\Admin\QuestionController::class, 'update'])->name('questions.update');
+            Route::delete('questions/{question}', [\App\Http\Controllers\Admin\QuestionController::class, 'destroy'])->name('questions.destroy');
+            Route::post('questions/{question}/quick-answer', [\App\Http\Controllers\Admin\QuestionController::class, 'quickAnswer'])->name('questions.quick-answer');
+            Route::post('parts/{part}/questions/generate-slots', [\App\Http\Controllers\Admin\QuestionController::class, 'generateSlots'])->name('parts.questions.generate-slots');
+
+            Route::get('parts/{part}/passages/create', [\App\Http\Controllers\Admin\PassageController::class, 'create'])->name('parts.passages.create');
+            Route::post('parts/{part}/passages', [\App\Http\Controllers\Admin\PassageController::class, 'store'])->name('parts.passages.store');
+            Route::get('passages/{passage}/edit', [\App\Http\Controllers\Admin\PassageController::class, 'edit'])->name('passages.edit');
+            Route::put('passages/{passage}', [\App\Http\Controllers\Admin\PassageController::class, 'update'])->name('passages.update');
+            Route::delete('passages/{passage}', [\App\Http\Controllers\Admin\PassageController::class, 'destroy'])->name('passages.destroy');
         });
 });

@@ -4,6 +4,12 @@
 @section('page-title', 'Chi tiết đề thi')
 
 @section('topbar-actions')
+    <a href="{{ route('admin.exams.questions.index', $exam) }}" class="btn btn-primary btn-sm">
+        <svg style="width:14px;height:14px" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
+        Ngân hàng câu hỏi
+    </a>
     <a href="{{ route('admin.exams.uploads', $exam) }}" class="btn btn-secondary btn-sm">
         <svg style="width:14px;height:14px" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/>
@@ -182,10 +188,9 @@
                             <a href="{{ route('admin.exams.uploads', $exam) }}" class="btn btn-ghost btn-sm" title="Quản lý File & Audio cho Part này">
                                 File & Audio
                             </a>
-                            {{-- Phase 3 Question button placeholder --}}
-                            <button class="btn btn-secondary btn-sm" onclick="alert('Tính năng quản lý chi tiết câu hỏi (Phase 3) đang được kích hoạt.')">
+                            <a href="{{ route('admin.exams.questions.index', ['exam' => $exam, 'part_id' => $part->id]) }}" class="btn btn-secondary btn-sm">
                                 Quản lý câu hỏi
-                            </button>
+                            </a>
                         </div>
                     </div>
                     @endforeach
