@@ -82,5 +82,10 @@ Route::middleware('auth')->group(function () {
             Route::get('passages/{passage}/edit', [\App\Http\Controllers\Admin\PassageController::class, 'edit'])->name('passages.edit');
             Route::put('passages/{passage}', [\App\Http\Controllers\Admin\PassageController::class, 'update'])->name('passages.update');
             Route::delete('passages/{passage}', [\App\Http\Controllers\Admin\PassageController::class, 'destroy'])->name('passages.destroy');
+
+            // Phase 5: Document Automation & Parser
+            Route::get('exams/{exam}/parser', [\App\Http\Controllers\Admin\ParserController::class, 'index'])->name('exams.parser.index');
+            Route::post('exams/{exam}/parser/answers', [\App\Http\Controllers\Admin\ParserController::class, 'parseAnswers'])->name('exams.parser.answers');
+            Route::post('exams/{exam}/parser/questions', [\App\Http\Controllers\Admin\ParserController::class, 'parseQuestions'])->name('exams.parser.questions');
         });
 });

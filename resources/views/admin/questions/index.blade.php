@@ -7,6 +7,12 @@
     <a href="{{ route('admin.exams.show', $exam) }}" class="btn btn-ghost btn-sm">
         ← Chi tiết đề thi
     </a>
+    <a href="{{ route('admin.exams.parser.index', $exam) }}" class="btn btn-secondary btn-sm">
+        <svg style="width:14px;height:14px" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+        </svg>
+        Nạp đề tự động
+    </a>
     @if($activePart)
         <a href="{{ route('admin.parts.questions.create', $activePart) }}" class="btn btn-primary btn-sm">
             <svg style="width:14px;height:14px" fill="none" stroke="currentColor" viewBox="0 0 24 24">

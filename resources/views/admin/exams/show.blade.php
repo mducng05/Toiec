@@ -10,6 +10,12 @@
         </svg>
         Ngân hàng câu hỏi
     </a>
+    <a href="{{ route('admin.exams.parser.index', $exam) }}" class="btn btn-secondary btn-sm">
+        <svg style="width:14px;height:14px" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+        </svg>
+        Nạp đề tự động
+    </a>
     <a href="{{ route('admin.exams.uploads', $exam) }}" class="btn btn-secondary btn-sm">
         <svg style="width:14px;height:14px" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/>
