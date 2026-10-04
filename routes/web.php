@@ -36,7 +36,7 @@ Route::get('/exams/{exam}', [\App\Http\Controllers\User\ExamController::class, '
 // ── Authenticated Routes ──────────────────────────────
 Route::middleware('auth')->group(function () {
 
-    // User routes
+    // User Exam Taking & Results
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::post('/exams/{exam}/start', [\App\Http\Controllers\User\ExamController::class, 'start'])->name('exams.start');
     Route::get('/attempts/{attempt}/take', [\App\Http\Controllers\User\ExamController::class, 'take'])->name('exams.take');
@@ -44,6 +44,25 @@ Route::middleware('auth')->group(function () {
     Route::post('/attempts/{attempt}/submit', [\App\Http\Controllers\User\ExamController::class, 'submit'])->name('exams.submit');
     Route::get('/attempts/{attempt}/results', [\App\Http\Controllers\User\ExamController::class, 'result'])->name('exams.results');
     Route::get('/attempts/{attempt}/review', [\App\Http\Controllers\User\ExamController::class, 'review'])->name('exams.review');
+
+    // My Exams & User Upload Workspace
+    Route::get('/my-exams', [\App\Http\Controllers\User\MyExamController::class, 'index'])->name('my-exams.index');
+    Route::get('/my-exams/create', [\App\Http\Controllers\User\MyExamController::class, 'create'])->name('my-exams.create');
+    Route::post('/my-exams', [\App\Http\Controllers\User\MyExamController::class, 'store'])->name('my-exams.store');
+    Route::get('/my-exams/{exam}', [\App\Http\Controllers\User\MyExamController::class, 'show'])->name('my-exams.show');
+    Route::get('/my-exams/{exam}/edit', [\App\Http\Controllers\User\MyExamController::class, 'edit'])->name('my-exams.edit');
+    Route::put('/my-exams/{exam}', [\App\Http\Controllers\User\MyExamController::class, 'update'])->name('my-exams.update');
+    Route::delete('/my-exams/{exam}', [\App\Http\Controllers\User\MyExamController::class, 'destroy'])->name('my-exams.destroy');
+    Route::get('/my-exams/{exam}/uploads', [\App\Http\Controllers\User\MyExamController::class, 'uploads'])->name('my-exams.uploads');
+    Route::post('/my-exams/{exam}/uploads/exam-pdf', [\App\Http\Controllers\User\MyExamController::class, 'uploadExamPdf'])->name('my-exams.uploads.exam-pdf');
+    Route::post('/my-exams/{exam}/uploads/answer-pdf', [\App\Http\Controllers\User\MyExamController::class, 'uploadAnswerPdf'])->name('my-exams.uploads.answer-pdf');
+    Route::post('/my-parts/{part}/uploads/audio', [\App\Http\Controllers\User\MyExamController::class, 'uploadAudio'])->name('my-parts.uploads.audio');
+    Route::get('/my-exams/{exam}/parser', [\App\Http\Controllers\User\MyExamController::class, 'parser'])->name('my-exams.parser');
+    Route::post('/my-exams/{exam}/parser/answers', [\App\Http\Controllers\User\MyExamController::class, 'parseAnswers'])->name('my-exams.parser.answers');
+    Route::post('/my-exams/{exam}/parser/questions', [\App\Http\Controllers\User\MyExamController::class, 'parseQuestions'])->name('my-exams.parser.questions');
+
+    // User Test History
+    Route::get('/history', [\App\Http\Controllers\User\HistoryController::class, 'index'])->name('history.index');
 
     // Admin routes
     Route::prefix('admin')

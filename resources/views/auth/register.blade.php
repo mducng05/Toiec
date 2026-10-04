@@ -13,7 +13,7 @@
             <div style="padding:2.25rem 2rem;">
                 {{-- Header --}}
                 <div style="text-align:center;margin-bottom:2rem;">
-                    <div style="width:48px;height:48px;background:var(--gold);border-radius:var(--r-md);display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-family:var(--font-display);font-size:1.5rem;font-weight:300;color:var(--dark-ink);">
+                    <div style="width:48px;height:48px;background:linear-gradient(135deg, #4f46e5 0%, #3b82f6 100%);border-radius:var(--r-md);display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-family:var(--font-display);font-size:1.5rem;font-weight:700;color:#ffffff;box-shadow:0 4px 12px rgba(79, 70, 229, 0.3);">
                         T
                     </div>
                     <h1 style="font-size:1.375rem;font-weight:700;color:var(--text-bright);margin:0 0 0.35rem;">
