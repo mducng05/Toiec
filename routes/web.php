@@ -30,11 +30,20 @@ Route::post('/logout', [LoginController::class, 'logout'])
     ->middleware('auth')
     ->name('logout');
 
+// User public exam show
+Route::get('/exams/{exam}', [\App\Http\Controllers\User\ExamController::class, 'show'])->name('exams.show');
+
 // ── Authenticated Routes ──────────────────────────────
 Route::middleware('auth')->group(function () {
 
     // User routes
     Route::get('/', [HomeController::class, 'index'])->name('home');
+    Route::post('/exams/{exam}/start', [\App\Http\Controllers\User\ExamController::class, 'start'])->name('exams.start');
+    Route::get('/attempts/{attempt}/take', [\App\Http\Controllers\User\ExamController::class, 'take'])->name('exams.take');
+    Route::post('/attempts/{attempt}/answers', [\App\Http\Controllers\User\ExamController::class, 'saveAnswer'])->name('exams.save-answer');
+    Route::post('/attempts/{attempt}/submit', [\App\Http\Controllers\User\ExamController::class, 'submit'])->name('exams.submit');
+    Route::get('/attempts/{attempt}/results', [\App\Http\Controllers\User\ExamController::class, 'result'])->name('exams.results');
+    Route::get('/attempts/{attempt}/review', [\App\Http\Controllers\User\ExamController::class, 'review'])->name('exams.review');
 
     // Admin routes
     Route::prefix('admin')

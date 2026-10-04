@@ -178,18 +178,12 @@
 
                 {{-- Action button footer --}}
                 <div style="padding:1rem 1.5rem;background:var(--bg-deep);border-top:1px solid var(--border);">
-                    @auth
-                        <button class="btn btn-primary" style="width:100%;justify-content:center;" onclick="alert('Giao diện làm bài thi trực tuyến đang được xây dựng trong Phase 4.')">
-                            Làm bài thi
-                            <svg style="width:14px;height:14px" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
-                            </svg>
-                        </button>
-                    @else
-                        <a href="{{ route('login') }}" class="btn btn-secondary" style="width:100%;justify-content:center;">
-                            Đăng nhập để làm bài
-                        </a>
-                    @endauth
+                    <a href="{{ route('exams.show', $exam) }}" class="btn btn-primary" style="width:100%;justify-content:center;">
+                        Làm bài thi
+                        <svg style="width:14px;height:14px" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                        </svg>
+                    </a>
                 </div>
 
             </div>
