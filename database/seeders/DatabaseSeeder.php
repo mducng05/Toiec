@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // Create default admin account
-        User::firstOrCreate(
+        $admin = User::firstOrCreate(
             ['email' => 'admin@toeic.local'],
             [
                 'name' => 'Admin',
@@ -34,5 +34,19 @@ class DatabaseSeeder extends Seeder
                 'role' => 'user',
             ]
         );
+
+        // Create sample exam if none exists
+        if (\App\Models\Exam::count() === 0) {
+            $examService = app(\App\Services\ExamService::class);
+            $exam = $examService->createExam([
+                'title'            => 'ETS TOEIC 2024 — Test 01',
+                'description'      => 'Đề thi thử TOEIC chuẩn format 2024 với đầy đủ 7 phần thi (Listening & Reading), có sẵn audio và lời giải chi tiết.',
+                'duration_minutes' => 120,
+                'is_full_test'     => true,
+                'parts'            => [1, 2, 3, 4, 5, 6, 7],
+            ], $admin->id);
+
+            $exam->update(['status' => 'published']);
+        }
     }
 }

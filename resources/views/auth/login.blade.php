@@ -3,93 +3,103 @@
 @section('title', 'Đăng nhập — TOEIC Practice')
 
 @section('content')
-<div class="min-h-[calc(100vh-4rem)] flex items-center justify-center px-4 py-12">
-    <div class="w-full max-w-md">
+<div style="min-height:calc(100vh - 180px);display:flex;align-items:center;justify-content:center;padding:3rem 1.5rem;">
+    <div style="width:100%;max-width:440px;">
 
         {{-- Card --}}
-        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
+        <div class="card" style="padding:0;overflow:hidden;">
+            <div class="gold-bar"></div>
 
-            {{-- Header --}}
-            <div class="text-center mb-8">
-                <div class="w-14 h-14 bg-indigo-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                    <span class="text-white text-2xl font-bold">T</span>
+            <div style="padding:2.25rem 2rem;">
+                {{-- Header --}}
+                <div style="text-align:center;margin-bottom:2rem;">
+                    <div style="width:48px;height:48px;background:var(--gold);border-radius:var(--r-md);display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-family:var(--font-display);font-size:1.5rem;font-weight:300;color:var(--dark-ink);">
+                        T
+                    </div>
+                    <h1 style="font-size:1.375rem;font-weight:700;color:var(--text-bright);margin:0 0 0.35rem;">
+                        Đăng nhập
+                    </h1>
+                    <p style="font-size:0.875rem;color:var(--text-faint);margin:0;">
+                        Tiếp tục lộ trình luyện thi TOEIC của bạn
+                    </p>
                 </div>
-                <h1 class="text-2xl font-bold text-gray-900">Đăng nhập</h1>
-                <p class="text-gray-500 text-sm mt-1">Tiếp tục hành trình luyện TOEIC</p>
+
+                {{-- Form --}}
+                <form id="login-form" method="POST" action="{{ route('login') }}" style="display:flex;flex-direction:column;gap:1.125rem;">
+                    @csrf
+
+                    {{-- Email --}}
+                    <div>
+                        <label for="email" class="label">
+                            Email <span style="color:var(--error)">*</span>
+                        </label>
+                        <input id="email" type="email" name="email"
+                               value="{{ old('email') }}"
+                               required autocomplete="email" autofocus
+                               placeholder="you@example.com"
+                               class="input {{ $errors->has('email') ? 'input-error' : '' }}">
+                        @error('email')
+                            <p style="font-size:0.8125rem;color:var(--error);margin-top:0.375rem;">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    {{-- Password --}}
+                    <div>
+                        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.375rem;">
+                            <label for="password" class="label" style="margin:0;">
+                                Mật khẩu <span style="color:var(--error)">*</span>
+                            </label>
+                        </div>
+                        <input id="password" type="password" name="password"
+                               required autocomplete="current-password"
+                               placeholder="••••••••"
+                               class="input {{ $errors->has('password') ? 'input-error' : '' }}">
+                        @error('password')
+                            <p style="font-size:0.8125rem;color:var(--error);margin-top:0.375rem;">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    {{-- Remember me --}}
+                    <div style="display:flex;align-items:center;gap:8px;margin-top:0.25rem;">
+                        <input id="remember" type="checkbox" name="remember"
+                               style="width:16px;height:16px;accent-color:var(--gold);cursor:pointer;">
+                        <label for="remember" style="font-size:0.8125rem;color:var(--text-muted);cursor:pointer;margin:0;">
+                            Ghi nhớ đăng nhập
+                        </label>
+                    </div>
+
+                    {{-- Submit --}}
+                    <button id="login-btn" type="submit" class="btn btn-primary btn-lg" style="width:100%;justify-content:center;margin-top:0.5rem;">
+                        Đăng nhập
+                        <svg style="width:15px;height:15px" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                        </svg>
+                    </button>
+                </form>
+
+                {{-- Register Link --}}
+                <div style="margin-top:1.5rem;text-align:center;font-size:0.875rem;color:var(--text-faint);">
+                    Chưa có tài khoản?
+                    <a href="{{ route('register') }}" style="color:var(--gold);text-decoration:none;font-weight:600;margin-left:4px;">
+                        Đăng ký ngay
+                    </a>
+                </div>
             </div>
 
-            {{-- Form --}}
-            <form id="login-form" method="POST" action="{{ route('login') }}" class="space-y-5">
-                @csrf
-
-                {{-- Email --}}
-                <div>
-                    <label for="email" class="block text-sm font-medium text-gray-700 mb-1.5">
-                        Email
-                    </label>
-                    <input id="email" type="email" name="email"
-                           value="{{ old('email') }}"
-                           required autocomplete="email" autofocus
-                           placeholder="you@example.com"
-                           class="w-full px-4 py-2.5 rounded-xl border text-sm transition-colors
-                                  {{ $errors->has('email') ? 'border-red-400 bg-red-50' : 'border-gray-200 focus:border-indigo-500' }}
-                                  focus:outline-none focus:ring-2 focus:ring-indigo-500/20">
-                    @error('email')
-                        <p class="mt-1.5 text-xs text-red-600">{{ $message }}</p>
-                    @enderror
+            {{-- Dev credentials banner --}}
+            @if(app()->environment('local'))
+                <div style="padding:1rem 1.5rem;background:var(--bg-deep);border-top:1px solid var(--border);font-size:0.75rem;color:var(--text-muted);">
+                    <div style="font-weight:600;color:var(--gold);margin-bottom:4px;letter-spacing:0.04em;text-transform:uppercase;">
+                        Tài khoản thử nghiệm (Seed):
+                    </div>
+                    <div style="display:flex;justify-content:space-between;gap:8px;">
+                        <span>Admin: <code style="color:var(--text-warm);">admin@toeic.local</code> / <code style="color:var(--text-warm);">password</code></span>
+                        <span>User: <code style="color:var(--text-warm);">user@toeic.local</code> / <code style="color:var(--text-warm);">password</code></span>
+                    </div>
                 </div>
-
-                {{-- Password --}}
-                <div>
-                    <label for="password" class="block text-sm font-medium text-gray-700 mb-1.5">
-                        Mật khẩu
-                    </label>
-                    <input id="password" type="password" name="password"
-                           required autocomplete="current-password"
-                           placeholder="••••••••"
-                           class="w-full px-4 py-2.5 rounded-xl border text-sm transition-colors
-                                  {{ $errors->has('password') ? 'border-red-400 bg-red-50' : 'border-gray-200 focus:border-indigo-500' }}
-                                  focus:outline-none focus:ring-2 focus:ring-indigo-500/20">
-                    @error('password')
-                        <p class="mt-1.5 text-xs text-red-600">{{ $message }}</p>
-                    @enderror
-                </div>
-
-                {{-- Remember me --}}
-                <div class="flex items-center">
-                    <input id="remember" type="checkbox" name="remember"
-                           class="h-4 w-4 text-indigo-600 rounded border-gray-300">
-                    <label for="remember" class="ml-2 text-sm text-gray-600">Ghi nhớ đăng nhập</label>
-                </div>
-
-                {{-- Submit --}}
-                <button id="login-btn" type="submit"
-                        class="w-full bg-indigo-600 text-white py-2.5 px-4 rounded-xl text-sm font-semibold
-                               hover:bg-indigo-700 active:scale-[0.98] transition-all focus:outline-none
-                               focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-                    Đăng nhập
-                </button>
-
-            </form>
-
-            {{-- Divider --}}
-            <div class="mt-6 text-center text-sm text-gray-500">
-                Chưa có tài khoản?
-                <a href="{{ route('register') }}" class="text-indigo-600 font-medium hover:underline">
-                    Đăng ký ngay
-                </a>
-            </div>
+            @endif
 
         </div>
-
-        {{-- Dev hint --}}
-        @if(app()->environment('local'))
-            <div class="mt-4 p-3 bg-amber-50 border border-amber-200 rounded-xl text-xs text-amber-700">
-                <strong>Dev accounts:</strong><br>
-                Admin: admin@toeic.local / password<br>
-                User: user@toeic.local / password
-            </div>
-        @endif
 
     </div>
 </div>
